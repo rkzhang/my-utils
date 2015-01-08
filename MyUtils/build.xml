@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="GBK"?>
+
+<project name="DcSync" default="web-jar" basedir="./">
+	<property file="build.properties"/>
+	<path id="compile.classpath" >
+		<pathelement location="lib/aopalliance-1.0.jar"/>
+		<pathelement location="lib/commons-codec-1.5.jar"/>
+		<pathelement location="lib/commons-lang-2.5.jar"/>
+		<pathelement location="lib/commons-logging-1.1.1.jar"/>
+		<pathelement location="lib/junit-4.8.2.jar"/>
+		<pathelement location="lib/log4j-1.2.13.jar"/>
+		<pathelement location="lib/poi-3.7.jar"/>
+		<pathelement location="lib/spring-aop-3.0.5.RELEASE.jar"/>
+		<pathelement location="lib/spring-asm-3.0.5.RELEASE.jar"/>
+		<pathelement location="lib/spring-beans-3.0.5.RELEASE.jar"/>
+		<pathelement location="lib/spring-context-3.0.5.RELEASE.jar"/>
+		<pathelement location="lib/spring-core-3.0.5.RELEASE.jar"/>
+		<pathelement location="lib/spring-expression-3.0.5.RELEASE.jar"/>
+		<pathelement location="lib/spring-jdbc-3.0.5.RELEASE.jar"/>
+		<pathelement location="lib/spring-tx-3.0.5.RELEASE.jar"/>
+		<pathelement location="lib/commons-dbcp-1.2.2.jar"/>
+	</path>
+	
+	<target name="init" >	
+		<delete file="${jar.dir}/${jar.name}" failonerror="true" />	
+		<delete failonerror="true">
+			<fileset dir="target/classes" includes="**/*.*"/>
+		</delete>
+	</target>
+	
+	
+	<target name="web-compile"  depends="init">
+		<javac destdir="target/classes" srcdir="src/main/java" encoding="UTF-8" includeantruntime="yes">
+			<classpath refid="compile.classpath"/>
+			<include name="**/*.java"/>		
+		</javac>
+	</target>	
+	
+	
+	<target name="web-jar"  depends="web-compile">
+		  <jar destfile="${jar.dir}/${jar.name}" basedir="target/classes" > 
+		  	<exclude name="**/*.properties"/>
+		  	<exclude name="**/*.xml"/>	
+		  	<exclude name="**/*.doc"/>	 
+		  	<exclude name="**/*.txt"/>	 
+		  	<exclude name="**/*.jar"/>
+		  </jar>
+	</target>
+	
+</project>
