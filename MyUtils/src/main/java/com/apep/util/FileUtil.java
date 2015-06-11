@@ -11,6 +11,7 @@ public class FileUtil {
 		}else{
 			return fileName;
 		}
+		
 	}
 	
 	public static String getFileSuffix(String fileName){
